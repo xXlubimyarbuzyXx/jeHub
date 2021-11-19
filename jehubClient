@@ -94,7 +94,7 @@ local Pets = player.PlayerGui.InventoryUI.InventoryMain.RightFrame.MainHolder.Da
 -- services
 local UIS = game:GetService('UserInputService')
 -- library stuff
-local eventModule = loadstring(game:HttpGet(''))()
+local eventModule = loadstring(game:HttpGet('https://raw.githubusercontent.com/xXlubimyarbuzyXx/jeHub/main/eventModule'))()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Theme = {SchemeColor = Color3.fromRGB(230, 35, 69),Background = Color3.fromRGB(32, 32, 32),Header = Color3.fromRGB(24, 24, 24),TextColor = Color3.fromRGB(255,255,255),ElementColor = Color3.fromRGB(24, 24, 24)}
 local Window = Library.CreateLib('JeHub', Theme)
@@ -135,18 +135,16 @@ end)
 local AutoLaunch = AutoFarmSection:NewToggle('Auto Launch', 'farm launches!', function(toggle)
 	getgenv().AutoLaunch = toggle
 	while true do 
-		if not getgenv().AutoLaunch then EndLaunchEvent:FireServer() break end
-		NewLaunchEvent:FireServer(Collision)
-		wait(0.1)
-		StopLaunchEvent:FireServer()
-		wait(0.3)
-		EndLaunchEvent:FireServer()
+		if not getgenv().AutoLaunch then eventModule:EndLaunchEvent() break end
+		eventModule:NewLaunchEvent()
+		eventModule:StopLaunchEvent()
+		eventModule:EndLaunchEvent()
 		fixCamera()
 	end
 end)
 -- player	
 local PlayerTab = Window:NewTab('Player')
-local PlayerSection = PlayerTab:NewSection('Movement')
+local PlayerSection = PlayerTab:NewSection('Player')
 PlayerSection:NewSlider('Walk Speed', 'Walk Speed', 250, 16,function(v)
 	player.Character.Humanoid.WalkSpeed = v
 end)
@@ -171,6 +169,12 @@ local Jump = PlayerSection:NewToggle('Auto Jump', 'infinity jumps', function(tog
 				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1)
 			end
 		end
+	end
+end)
+local Camera = PlayerSection:NewToggle('Fix Camera', 'fix camera', function(toggle)
+	getgenv().Camera = toggle
+	while getgenv().Camera do wait()
+		fixCamera()
 	end
 end)
 -- auto code
