@@ -5,6 +5,8 @@ local CodeRequest = game:GetService('ReplicatedStorage')["PromoCodeRequest"]
 local EndLaunchEvent = game:GetService('ReplicatedStorage')["ProjectBlue_ClientEndLaunchEvent"]
 local NewLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientNewLaunchEvent"]
 local StopLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientStopLaunchEvent"]
+local JumpHoopEvent = game:GetService("ReplicatedStorage")["ProjectBlue_JumpHoopEvent"]
+local GemHoopEvent = game:GetService("ReplicatedStorage")["ProjectBlue_GemHoopEvent"]
 
 local eventModule = {}
 
@@ -26,6 +28,14 @@ end
 
 function eventModule:ShopRoll(egg)
     TGSRoll:InvokeServer(egg)
+end
+
+function eventModule:CollectExtraJump(extraJump)
+    JumpHoopEvent:FireServer(extraJump)
+end
+
+function eventModule:CollectGem(gem)
+    GemHoopEvent:FireServer(gem)
 end
 
 return eventModule
