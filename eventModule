@@ -21,15 +21,11 @@ function eventModule.EndEvent()
 end
 
 function eventModule.EnterCode(codeEntered)
-    if type(codeEntered) == "string" then
-        CodeRequest:FireServer(codeEntered)
-    end
+    CodeRequest:FireServer(codeEntered)
 end
 
 function eventModule.ShopRoll(egg)
-    if type(egg) == "string" then
-        TGSRoll:FireServer(egg)
-    end 
+    TGSRoll:FireServer(egg)
 end
 
 return eventModule
