@@ -8,23 +8,23 @@ local StopLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_Client
 
 local eventModule = {}
 
-function eventModule.NewEvent()
+function eventModule:NewLaunchEvent()
     NewLaunchEvent:FireServer(Collision)
 end
 
-function eventModule.StopEvent()
+function eventModule:StopLaunchEvent()
     StopLaunchEvent:FireServer()
 end
 
-function eventModule.EndEvent()
+function eventModule:EndLaunchEvent()
     EndLaunchEvent:FireServer()
 end
 
-function eventModule.EnterCode(codeEntered)
+function eventModule:EnterCode(codeEntered)
     CodeRequest:InvokeServer(codeEntered)
 end
 
-function eventModule.ShopRoll(egg)
+function eventModule:ShopRoll(egg)
     TGSRoll:InvokeServer(egg)
 end
 
