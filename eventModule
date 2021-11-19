@@ -6,26 +6,30 @@ local EndLaunchEvent = game:GetService('ReplicatedStorage')["ProjectBlue_ClientE
 local NewLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientNewLaunchEvent"]
 local StopLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientStopLaunchEvent"]
 
-function NewEvent()
+local eventModule = {}
+
+function eventModule.NewEvent()
     NewLaunchEvent:FireServer(Collision)
 end
 
-function StopEvent()
+function eventModule.StopEvent()
     StopLaunchEvent:FireServer()
 end
 
-function EndEvent()
+function eventModule.EndEvent()
     EndLaunchEvent:FireServer()
 end
 
-function EnterCode(codeEntered)
+function eventModule.EnterCode(codeEntered)
     if type(codeEntered) == "string" then
         CodeRequest:FireServer(codeEntered)
     end
 end
 
-function ShopRoll(egg)
+function eventModule.ShopRoll(egg)
     if type(egg) == "string" then
         TGSRoll:FireServer(egg)
     end 
 end
+
+return eventModule
