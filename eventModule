@@ -21,11 +21,11 @@ function eventModule.EndEvent()
 end
 
 function eventModule.EnterCode(codeEntered)
-    CodeRequest:FireServer(codeEntered)
+    CodeRequest:InvokeServer(codeEntered)
 end
 
 function eventModule.ShopRoll(egg)
-    TGSRoll:FireServer(egg)
+    TGSRoll:InvokeServer(egg)
 end
 
 return eventModule
