@@ -1,0 +1,209 @@
+local Data = {
+	['Teleports'] = {
+		'Spawn',
+		'Shop',
+		'Map End',
+		'Booster',
+		'Area 1',
+		'Area 2',
+		'Area 3',
+		'Area 4',
+		'Area 5',
+	},
+
+	["positions"] = {
+		CFrame.new(-7, 22.5, -10051), -- spawn
+		CFrame.new(81, 22.5, -10036), -- shop
+		CFrame.new(16,121,13058), -- end pos
+		CFrame.new(-12, 27.5, -9994), -- booster
+		CFrame.new(11, 10, 300), -- area 1
+		CFrame.new(11, 10, 1000), -- area 2
+		CFrame.new(11, 10, 2500), -- area 3
+		CFrame.new(11, 10, 6000), -- area 4
+		CFrame.new(-10.5, -50, 100000000) -- insane distance
+	},
+
+	['EggTypes'] = {
+		'Area_01',
+		'Area_02',
+		'Area_03',
+	},
+
+	['Coins'] = {
+		['Farm'] = false,
+		['CoinsEarned'] = 0,
+	},
+
+	['Gems'] = {
+		['Farm'] = false,
+		['GemsEarned'] = 0,
+	},
+
+	['Eggs'] = {
+		['EggType'] = nil,
+		['EggAmount'] = 0,
+		['Openned'] = 0,
+		['Wait'] = 0.1,
+	},
+
+	['Codes'] = {
+		'5001LIKES',
+		'JETPACKJUMPER10',
+	},
+}
+
+local function checkGui(what)
+	if what.Visible then
+		return true
+	end
+end
+
+local function check(p1, p2)
+	local p3, p4 = pcall(function()
+		local p5 = 0 + p2
+	end)
+	
+	if p3 then
+		return true
+	end
+end
+
+local function touchObject(data)
+	game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = data
+end
+
+local function fixCamera()
+	game:GetService('Players').LocalPlayer.CameraMaxZoomDistance = 100
+	game:GetService('Players').LocalPlayer.CameraMinZoomDistance = 0.5
+	workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+end
+
+local Collision = game:GetService("Workspace").World.Lobby.Launcher.Collision
+local Location = game:GetService("Workspace").World.Areas.Area1.Hoops.Extrajumps
+local TGSRoll = game:GetService('ReplicatedStorage')["TGSTrailShopRoll"]
+local CodeRequest = game:GetService('ReplicatedStorage')["PromoCodeRequest"]
+local EndLaunchEvent = game:GetService('ReplicatedStorage')["ProjectBlue_ClientEndLaunchEvent"]
+local NewLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientNewLaunchEvent"]
+local StopLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientStopLaunchEvent"]
+
+local player = game:GetService('Players').LocalPlayer
+local plrGui = player.PlayerGui
+local HUD = plrGui.HUD
+local RewardUI = plrGui.RewardUI
+local Pets = player.PlayerGui.InventoryUI.InventoryMain.RightFrame.MainHolder.DarkFrame.ContentHolder.TrailsFrame.ScrollingGridList
+-- services
+local UIS = game:GetService('UserInputService')
+-- library stuff
+local eventModule = loadstring(game:HttpGet(''))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Theme = {SchemeColor = Color3.fromRGB(230, 35, 69),Background = Color3.fromRGB(32, 32, 32),Header = Color3.fromRGB(24, 24, 24),TextColor = Color3.fromRGB(255,255,255),ElementColor = Color3.fromRGB(24, 24, 24)}
+local Window = Library.CreateLib('JeHub', Theme)
+local Credits = Window:NewTab('JeHub')
+local CreditSection = Credits:NewSection('JeHub')
+local Version = CreditSection:NewDropdown('JeHub - 0.4')
+local New = CreditSection:NewDropdown('JeHub Update 1', 'New Stuff :D', {
+	'Updated/fixed Auto Hatch',
+	'Auto Launch',
+	'Auto Jumps',
+	'Fixed reaction lag',
+	'Auto Gems',
+	'Fixed Camera',
+})
+local LabelLibrary = CreditSection:NewDropdown('Library: Kavo-UI')
+local ToggleUI = CreditSection:NewKeybind("Toggle UI", "Toggle UI", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+-- auto farm
+local AutoFarm = Window:NewTab("Auto Farm")
+local AutoFarmSection = AutoFarm:NewSection('Auto Farm')
+local AutoFarmMoney = AutoFarmSection:NewToggle("Auto Gold", "Automaticly farm", function(farm)
+	Data.Coins.Farm = farm
+end)
+local AutoGemsMoney = AutoFarmSection:NewToggle("Auto Gems", "Automaticly farm Gems", function(farm)
+	Data.Gems.Farm = farm
+	print(farm)
+	while Data.Gems.Farm do wait(0.1)
+		print('working')
+		local Gem = game:GetService("Workspace").World.Areas.Area2.Hoops.GemHoops.SuperGemHoop
+		if not checkGui(HUD.Distance.TextLabel) then
+			touchObject(Data.positions[4])
+		end
+		wait(0.05)
+		touchObject(Gem.CFrame)
+	end
+end)
+local AutoLaunch = AutoFarmSection:NewToggle('Auto Launch', 'farm launches!', function(toggle)
+	getgenv().AutoLaunch = toggle
+	while true do 
+		if not getgenv().AutoLaunch then EndLaunchEvent:FireServer() break end
+		NewLaunchEvent:FireServer(Collision)
+		wait(0.1)
+		StopLaunchEvent:FireServer()
+		wait(0.3)
+		EndLaunchEvent:FireServer()
+		fixCamera()
+	end
+end)
+-- player	
+local PlayerTab = Window:NewTab('Player')
+local PlayerSection = PlayerTab:NewSection('Movement')
+PlayerSection:NewSlider('Walk Speed', 'Walk Speed', 250, 16,function(v)
+	player.Character.Humanoid.WalkSpeed = v
+end)
+PlayerSection:NewSlider('Jump Power', 'Jump Power', 250, 50,function(v)
+	player.Character.Humanoid.JumpPower = v
+end)
+-- teleport
+local Teleports = PlayerSection:NewDropdown("Teleports","Teleport to any location!", Data.Teleports, function(selected)
+	for i=1, #Data.Teleports do
+		if Data.Teleports[i] == selected then
+			player.Character.HumanoidRootPart.CFrame = Data.positions[i]
+		end
+	end
+end)
+local Jump = PlayerSection:NewToggle('Auto Jump', 'infinity jumps', function(toggle)
+	getgenv().AutoJump = toggle
+	while getgenv().AutoJump and checkGui(HUD.Distance.TextLabel) do wait()
+		print'idk'
+		for i,v in pairs(Location:GetDescendants()) do
+			if v.Name == 'TouchInterest' and v.Parent then
+				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) wait()
+				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1)
+			end
+		end
+	end
+end)
+-- auto code
+local CodeSection = PlayerTab:NewSection('Auto Codes')
+local CodesButton = CodeSection:NewButton('Redeem All Codes!', 'auto codes', function()
+	for i,code in pairs(Data.Codes) do
+		CodeRequest:InvokeServer(code)
+	end
+end)
+-- pets
+local Pets = Window:NewTab('Pets')
+local AutoOpenSection = Pets:NewSection('Auto Open')
+local Openned_Eggs = AutoOpenSection:NewButton('Eggs Oppened: ' .. Data.Eggs.Openned)
+local EggTime = AutoOpenSection:NewTextBox('Egg Time', 'between', function(eggtime)
+	if check(Data.Eggs.Wait, eggtime) then
+		Data.Eggs.Wait = 0 + eggtime
+	end
+end)
+local selectEggType = AutoOpenSection:NewDropdown('Eggs', 'eggs', Data.EggTypes, function(selected)
+	Data.Eggs.EggType = selected
+end)
+local EggAmount = AutoOpenSection:NewTextBox('Egg Amount', '', function(eggs)
+	if check(Data.Eggs.EggAmount, eggs) then
+		Data.Eggs.EggAmount = 0 + eggs
+	end
+end)
+local openEgg = AutoOpenSection:NewButton('Open Eggs', 'auto egg go brrr', function()
+	getgenv().Open = 0
+	while getgenv().Open < Data.Eggs.EggAmount and not checkGui(HUD.Distance.TextLabel) do 
+		TGSRoll:InvokeServer(Data.Eggs.EggType)
+		wait(Data.Eggs.Wait)
+		Data.Eggs.Openned+= 1
+		getgenv().Open+= 1
+		Openned_Eggs:UpdateButton('Eggs Oppened: ' .. Data.Eggs.Openned)
+	end
+end)
