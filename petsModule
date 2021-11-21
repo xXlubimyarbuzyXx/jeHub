@@ -24,7 +24,6 @@ function petsModule:getPets(location)
         return pets
     else
         warn('JeHub: Invalid Class')
-        return {} 
     end
 end
 
