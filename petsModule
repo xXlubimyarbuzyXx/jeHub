@@ -1,6 +1,6 @@
 local petsModule = {}
 
-function petsModule.CheckPetClass(class, pet)
+function petsModule:CheckPetClass(class, pet)
     if typeof(class) == 'table' and typeof(pet) == 'Instance' then
         for i,v in pairs(class) do
             if pet.Image == v then
@@ -13,7 +13,7 @@ function petsModule.CheckPetClass(class, pet)
     end
 end
 
-function getPets(location)
+function petsModule:getPets(location)
     if typeof(location) == 'Instance' then
         local pets = {}
         for i,v in pairs(location:GetChildren()) do
