@@ -5,6 +5,7 @@ function petsModule:CheckPetClass(class, pet)
         for i,v in pairs(class) do
             if pet.Image == v then
                 return true, pet, pet.Image
+                pet:Remove()
             end
         end
         return false, pet, pet.Image
