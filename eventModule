@@ -42,6 +42,7 @@ end
 function eventModule:SellTrail(trail)
     if typeof(trail) == 'Instance' then
         TGS_SellTrail:InvokeServer(trail.Name)
+        print('selled succesfully', trail.Name)
     else
         warn('JeHub: Invalid instance') 
     end  
