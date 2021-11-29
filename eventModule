@@ -36,7 +36,7 @@ function eventModule:CollectExtraJump(extraJump)
     JumpHoopEvent:FireServer(extraJump)
 end
 
-function eventmodule:PetRoll(egg)
+function eventModule:PetRoll(egg)
     TGS_PetRoll:InvokeServer(egg)
 end
 
