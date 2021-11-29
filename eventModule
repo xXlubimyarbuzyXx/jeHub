@@ -1,6 +1,6 @@
 -- EVENTS
 local Collision = game:GetService("Workspace").World.Lobby.Launcher.Collision
-local TGSRoll = game:GetService('ReplicatedStorage')["TGSTrailShopRoll"]
+local TGS_TrailRoll = game:GetService('ReplicatedStorage')["TGSTrailShopRoll"]
 local CodeRequest = game:GetService('ReplicatedStorage')["PromoCodeRequest"]
 local EndLaunchEvent = game:GetService('ReplicatedStorage')["ProjectBlue_ClientEndLaunchEvent"]
 local NewLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_ClientNewLaunchEvent"]
@@ -8,6 +8,7 @@ local StopLaunchEvent = game:GetService("ReplicatedStorage")["ProjectBlue_Client
 local JumpHoopEvent = game:GetService("ReplicatedStorage")["ProjectBlue_JumpHoopEvent"]
 local GemHoopEvent = game:GetService("ReplicatedStorage")["ProjectBlue_GemHoopEvent"]
 local TGS_SellTrail = game:GetService("ReplicatedStorage")["TGSTrailSystem_SellTrail"]
+local TGS_PetRoll = game:GetService("ReplicatedStorage").TGSPetShopRoll
 
 local eventModule = {}
 
@@ -27,12 +28,16 @@ function eventModule:EnterCode(codeEntered)
     CodeRequest:InvokeServer(codeEntered)
 end
 
-function eventModule:ShopRoll(egg)
-    TGSRoll:InvokeServer(egg)
+function eventModule:TrailRoll(egg)
+    TGS_TrailRoll:InvokeServer(egg)
 end
 
 function eventModule:CollectExtraJump(extraJump)
     JumpHoopEvent:FireServer(extraJump)
+end
+
+function eventmodule:PetRoll(egg)
+    TGS_PetRoll:InvokeServer(egg)
 end
 
 function eventModule:CollectGem(gem)
@@ -42,9 +47,6 @@ end
 function eventModule:SellTrail(trail)
     if typeof(trail) == 'Instance' then
         TGS_SellTrail:InvokeServer(trail.Name)
-        print('selled succesfully', trail.Name)
-    else
-        warn('JeHub: Invalid instance') 
     end  
 end
 
