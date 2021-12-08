@@ -8,6 +8,42 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
+function jeHubModule.notification()
+	local imageUrl = jeHubModule.gameStatus()
+	local Notification = Instance.new("ScreenGui")
+	local Frame = Instance.new("Frame")
+	local UICorner = Instance.new("UICorner")
+	local GameIcon = Instance.new("ImageLabel")
+	local Notification_2 = Instance.new("TextLabel")
+	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+	Notification.Name = "Notification"
+	Notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	Frame.Parent = Notification
+	Frame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+	Frame.Position = UDim2.new(0.849696994, 0, 0.820033967, 0)
+	Frame.Size = UDim2.new(0, 236, 0, 100)
+	UICorner.Parent = Frame
+	GameIcon.Name = "GameIcon"
+	GameIcon.Parent = Frame
+	GameIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GameIcon.Position = UDim2.new(0, 20, 0, 20)
+	GameIcon.Size = UDim2.new(0, 60, 0, 60)
+	GameIcon.Image = imageUrl
+	Notification_2.Name = "Notification"
+	Notification_2.Parent = Frame
+	Notification_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Notification_2.BackgroundTransparency = 1.000
+	Notification_2.Position = UDim2.new(0.432203382, 0, 0.25, 0)
+	Notification_2.Size = UDim2.new(0, 112, 0, 50)
+	Notification_2.Font = Enum.Font.SourceSans
+	Notification_2.Text = "Loading JeHub"
+	Notification_2.TextColor3 = Color3.fromRGB(236, 236, 236)
+	Notification_2.TextSize = 14.000
+	UITextSizeConstraint.Parent = Notification_2
+	UITextSizeConstraint.MinTextSize = 25
+end
+
 function jeHubModule.TextToLocal(text, name)
 	local blacklisted = {' ','~','`','!','@','#','$','%','^','&','*','(',')','-','=','+',';',':',',','.','<','>','/', ''}
 	local txt = ''
