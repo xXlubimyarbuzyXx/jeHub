@@ -38,7 +38,7 @@ function jeHubModule.Notify(text, image)
 	GameIcon.Size = UDim2.new(0, 60, 0, 60)
 	GameIcon.ZIndex = 9
 	if image then
-		GameIcon.Image = image
+		GameIcon.Image = 'rbxassetid://' .. tostring(image)
 	else
 		GameIcon.Image = imageUrl
 	end
