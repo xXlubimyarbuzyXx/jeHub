@@ -1,0 +1,55 @@
+local jeHubModule = {}
+local MPS = game:GetService("MarketplaceService")
+
+function jeHubModule.gameStatus()
+	local update = string.sub(MPS:GetProductInfo(game.PlaceId).Updated, 1,10)
+	local imageUrl = MPS:GetProductInfo(game:GetService("AssetService"):GetGamePlacesAsync():GetCurrentPage()[1].PlaceId).IconImageAssetId
+	local gameName = MPS:GetProductInfo(game.PlaceId).Name
+	return imageUrl, gameName, update
+end
+
+function jeHubModule.TextToLocal(text, name)
+	local blacklisted = {' ','~','`','!','@','#','$','%','^','&','*','(',')','-','=','+',';',':',',','.','<','>','/', ''}
+	local txt = ''
+	for i=1, #name do
+		local format = string.sub(name, i,i)
+		for i,v in pairs(blacklisted) do
+			if format == v then
+				format = '_'
+			end
+		end
+		txt = txt .. format
+	end
+	local TTL = 'local ' .. txt .. ' = ' .. text
+	return TTL, txt
+end
+
+function jeHubModule.TextToTable(text, space, checkSpace)
+	local txt = [[{]]
+	local letter2 = ''
+	if space then
+		letter2 = ' '
+	end
+	text = tostring(text)
+	for i=1, #text do
+		local function write(letter)
+			if i ~= #text then
+				txt = txt .. [[']] .. letter .. [[']] .. [[,]] .. letter2
+			else
+				txt = txt .. [[']] .. letter .. [[']]
+			end
+		end
+		local letter = string.sub(text, i,i)
+		if checkSpace then
+			if letter ~= ' ' then
+				write(letter)
+			end
+		else
+			write(letter)
+		end
+	end
+	txt = txt .. [[}]]
+	return txt
+end
+
+return jeHubModule
