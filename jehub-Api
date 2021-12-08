@@ -9,7 +9,7 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify()
+function jeHubModule.Notify(text)
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
 		if v:FindFirstChild('Frame') then
 			v:Remove()
@@ -45,7 +45,7 @@ function jeHubModule.Notify()
 	Notification.Position = UDim2.new(0.444915235, 0, 0.25, 0)
 	Notification.Size = UDim2.new(0, 112, 0, 50)
 	Notification.Font = Enum.Font.SourceSans
-	Notification.Text = "Loading JeHub"
+	Notification.Text = text
 	Notification.TextColor3 = Color3.fromRGB(236, 236, 236)
 	Notification.TextSize = 14.000
 	UITextSizeConstraint.Parent = Notification
