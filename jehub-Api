@@ -9,7 +9,7 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify(text)
+function jeHubModule.Notify(text, image)
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
 		if v:FindFirstChild('Frame') then
 			v:Remove()
@@ -37,7 +37,11 @@ function jeHubModule.Notify(text)
 	GameIcon.Position = UDim2.new(0, 20, 0, 20)
 	GameIcon.Size = UDim2.new(0, 60, 0, 60)
 	GameIcon.ZIndex = 9
-	GameIcon.Image = imageUrl
+	if image then
+		GameIcon.Image = image
+	else
+		GameIcon.Image = imageUrl
+	end
 	Notification.Name = "Notification"
 	Notification.Parent = Frame
 	Notification.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
