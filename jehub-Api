@@ -50,6 +50,7 @@ function jeHubModule.Notify()
 	Notification.TextSize = 14.000
 	UITextSizeConstraint.Parent = Notification
 	UITextSizeConstraint.MinTextSize = 25
+	return true
 end
 
 function jeHubModule.TextToLocal(text, name)
