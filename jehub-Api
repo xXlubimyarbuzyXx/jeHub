@@ -56,7 +56,7 @@ function jeHubModule.Notify(text, radius, radius2)
 	Notification.Position = UDim2.new(0.3898305, 0, 0.25, 0)
 	Notification.Size = UDim2.new(0, 125, 0, 50)
 	Notification.Font = Enum.Font.SourceSans
-	Notification.Text = "JeHub API Test"
+	Notification.Text = text
 	Notification.TextColor3 = Color3.fromRGB(236, 236, 236)
 	Notification.TextScaled = true
 	Notification.TextSize = 14.000
