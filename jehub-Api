@@ -1,6 +1,6 @@
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
-local default = 6
+local default = 0.2
 
 function jeHubModule.gameStatus()
 	local update = string.sub(MPS:GetProductInfo(game.PlaceId).Updated, 1,10)
@@ -10,11 +10,17 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify(text, title)
+function jeHubModule.Notify(text, title, tweenSleep, tweenSleep2)
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
 		if v:FindFirstChild('Holder') then
 			v:Remove()
 		end
+	end
+	if not tweenSleep then
+		tweenSleep = default
+	end
+	if not tweenSleep2 then
+		tweenSleep2 = default
 	end
 	local imageUrl = jeHubModule.gameStatus()
 	local Gui = Instance.new("ScreenGui")
@@ -101,10 +107,10 @@ function jeHubModule.Notify(text, title)
 	Close.ImageRectSize = Vector2.new(36, 36)
 
 	wait(0.6)
-	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.3)
+	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, tweenSleep)
 
 	Close.MouseButton1Click:Connect(function()
-		Holder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.2, false, function()
+		Holder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, tweenSleep2, false, function()
 			Gui:Remove()
 		end)
 	end)
