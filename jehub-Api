@@ -30,7 +30,7 @@ function jeHubModule.Notify(text, title)
 	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 	local Close = Instance.new("ImageButton")
 	Gui.Name = '0.' .. tostring(math.random(1,99999999))
-	Gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Gui.Parent = game:GetService('CoreGui')
 	Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Holder.Name = "Holder"
 	Holder.Parent = Gui
@@ -38,7 +38,7 @@ function jeHubModule.Notify(text, title)
 	Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 	Holder.ClipsDescendants = true
 	Holder.Position = UDim2.new(0.849696994, 0, 0.840552151, 0)
-	Holder.Size = UDim2.new(0, 236, 0, 121)
+	Holder.Size = UDim2.new(0, 0, 0, 0)
 	UICorner.CornerRadius = UDim.new(0, 10)
 	UICorner.Parent = Holder
 	GameIcon.Name = "GameIcon"
@@ -100,7 +100,8 @@ function jeHubModule.Notify(text, title)
 	Close.ImageRectOffset = Vector2.new(924, 724)
 	Close.ImageRectSize = Vector2.new(36, 36)
 
-	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1)
+	wait(0.6)
+	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.3)
 
 	Close.MouseButton1Click:Connect(function()
 		Holder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.2, false, function()
