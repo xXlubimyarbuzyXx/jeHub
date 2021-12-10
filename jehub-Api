@@ -10,7 +10,7 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify(text, radius, radius2)
+function jeHubModule.Notify(text,title, radius, radius2)
 	if not radius then
 		radius = default
 	end
@@ -18,52 +18,104 @@ function jeHubModule.Notify(text, radius, radius2)
 		radius2 = default
 	end
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
-		if v:FindFirstChild('Frame') then
+		if v:FindFirstChild('Holder') then
 			v:Remove()
 		end
 	end
 	local imageUrl = jeHubModule.gameStatus()
 	local Gui = Instance.new("ScreenGui")
-	local Frame = Instance.new("Frame")
+	local Holder = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local GameIcon = Instance.new("ImageLabel")
 	local UICorner_2 = Instance.new("UICorner")
-	local Notification = Instance.new("TextLabel")
+	local Text = Instance.new("TextLabel")
 	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-	Gui.Name = tostring(math.random(1,9999999))
-	Gui.Parent = game:GetService('CoreGui')
+	local TopBar = Instance.new("Frame")
+	local UICorner_3 = Instance.new("UICorner")
+	local Icon = Instance.new("ImageLabel")
+	local UICorner_4 = Instance.new("UICorner")
+	local Title = Instance.new("TextLabel")
+	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+	local Close = Instance.new("ImageButton")
+	Gui.Name = tostring(math.random(0,99999999))
+	Gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	Frame.Parent = Gui
-	Frame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-	Frame.Position = UDim2.new(0.860000014, 0, 0.870000005, 0)
-	Frame.Size = UDim2.new(0, 236, 0, 100)
-	UICorner.CornerRadius = UDim.new(0, radius)
-	UICorner.Parent = Frame
+	Holder.Name = "Holder"
+	Holder.Parent = Gui
+	Holder.Active = true
+	Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+	Holder.ClipsDescendants = true
+	Holder.Position = UDim2.new(0.849696994, 0, 0.840552151, 0)
+	Holder.Size = UDim2.new(0, 236, 0, 121)
+	UICorner.CornerRadius = UDim.new(0, 10)
+	UICorner.Parent = Holder
 	GameIcon.Name = "GameIcon"
-	GameIcon.Parent = Frame
+	GameIcon.Parent = Holder
 	GameIcon.Active = true
-	GameIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	GameIcon.Position = UDim2.new(0, 20, 0, 20)
+	GameIcon.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	GameIcon.BackgroundTransparency = 1.000
+	GameIcon.Position = UDim2.new(0, 20, 0, 42)
 	GameIcon.Size = UDim2.new(0, 60, 0, 60)
 	GameIcon.ZIndex = 9
 	GameIcon.Image = imageUrl
-	UICorner_2.CornerRadius = UDim.new(0, radius2)
 	UICorner_2.Parent = GameIcon
-	Notification.Name = "Notification"
-	Notification.Parent = Frame
-	Notification.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Notification.BackgroundTransparency = 1.000
-	Notification.Position = UDim2.new(0.3898305, 0, 0.25, 0)
-	Notification.Size = UDim2.new(0, 125, 0, 50)
-	Notification.Font = Enum.Font.SourceSans
-	Notification.Text = text
-	Notification.TextColor3 = Color3.fromRGB(236, 236, 236)
-	Notification.TextScaled = true
-	Notification.TextSize = 14.000
-	Notification.TextWrapped = true
-	UITextSizeConstraint.Parent = Notification
+	Text.Name = text
+	Text.Parent = Holder
+	Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Text.BackgroundTransparency = 1.000
+	Text.Position = UDim2.new(0.419491529, 0, 0.24778761, 0)
+	Text.Size = UDim2.new(0, 137, 0, 74)
+	Text.Font = Enum.Font.SourceSans
+	Text.Text = text
+	Text.TextColor3 = Color3.fromRGB(236, 236, 236)
+	Text.TextScaled = true
+	Text.TextSize = 14.000
+	Text.TextWrapped = true
+	UITextSizeConstraint.Parent = Text
 	UITextSizeConstraint.MaxTextSize = 25
 	UITextSizeConstraint.MinTextSize = 15
+	TopBar.Name = "TopBar"
+	TopBar.Parent = Holder
+	TopBar.Active = true
+	TopBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	TopBar.ClipsDescendants = true
+	TopBar.Size = UDim2.new(1, 0, 0, 28)
+	UICorner_3.Parent = TopBar
+	Icon.Name = "Icon"
+	Icon.Parent = TopBar
+	Icon.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	Icon.BorderColor3 = Color3.fromRGB(30, 30, 30)
+	Icon.Size = UDim2.new(0, 28, 0, 28)
+	UICorner_4.Parent = Icon
+	Title.Name = title
+	Title.Parent = TopBar
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.Position = UDim2.new(0.148305088, 0, 0, 0)
+	Title.Size = UDim2.new(0, 201, 0, 28)
+	Title.Font = Enum.Font.Gotham
+	Title.Text = "Title"
+	Title.TextColor3 = Color3.fromRGB(236, 236, 236)
+	Title.TextScaled = true
+	Title.TextSize = 16.000
+	Title.TextWrapped = true
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	UITextSizeConstraint_2.Parent = Title
+	UITextSizeConstraint_2.MaxTextSize = 18
+	UITextSizeConstraint_2.MinTextSize = 10
+	Close.Name = "Close"
+	Close.Parent = TopBar
+	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Close.BackgroundTransparency = 1.000
+	Close.Position = UDim2.new(0.889999986, 0, 0, 1)
+	Close.Size = UDim2.new(0, 25, 0, 25)
+	Close.Image = "rbxassetid://3926305904"
+	Close.ImageRectOffset = Vector2.new(924, 724)
+	Close.ImageRectSize = Vector2.new(36, 36)
+
+	Close.MouseButton1Click:Connect(function()
+		Gui:Remove()
+	end)
 end
 
 function jeHubModule.FindClass(classes, location)
@@ -81,39 +133,6 @@ function jeHubModule.FindClass(classes, location)
 		end
 	end
 	return events, finded
-end
-
-function jeHubModule.DecodeRemotes()
-	for i, v in pairs(getgc(true)) do
-	    if type(v) == "table" and rawget(v, "Remote") then
-		if type(v.Remote) == "userdata" then
-		    v.Remote.Name = v.Name
-		end
-	    end
-	end
-	local l = require(game:GetService("ReplicatedStorage").Modules.Utils.Network).InvokeServer
-	local function remote(remote, ...)
-	    local key = getupvalue(l, 1)
-	    function ToByteArgs(p61)
-		if 255 < p61 then
-		else
-		    return p61
-		end
-		return math.floor(p61 / 256) % 256
-	    end
-	    function ToByteString(p62)
-		return string.char(ToByteArgs(p62))
-	    end
-	    local decodedkey = ToByteString(key)
-	    if remote:IsA("RemoteEvent") then
-		hai = "FireServer"
-	    elseif remote:IsA("RemoteFunction") then
-		hai = "InvokeServer"
-	    else
-		return "lol"
-	    end
-	    remote[hai](remote, decodedkey, ...)
-	end
 end
 
 function jeHubModule.TextToTable(text, space, checkSpace)
