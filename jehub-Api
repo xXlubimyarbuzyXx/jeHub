@@ -66,20 +66,21 @@ function jeHubModule.Notify(text, radius, radius2)
 	UITextSizeConstraint.MinTextSize = 15
 end
 
-function jeHubModule.TextToLocal(text, name)
-	local blacklisted = {' ','~','`','!','@','#','$','%','^','&','*','(',')','-','=','+',';',':',',','.','<','>','/', ''}
-	local txt = ''
-	for i=1, #name do
-		local format = string.sub(name, i,i)
-		for i,v in pairs(blacklisted) do
-			if format == v then
-				format = '_'
+function jeHubModule.FindClass(classes, location)
+	print('---------------------------')
+	local events = {}
+	local finded = {}
+	if location ~= game then
+		for _,v in pairs(location:GetDescendants()) do
+			for _,e in pairs(classes) do
+				if v.ClassName == e then
+					events[#events + 1] =  v
+					finded[#finded + 1] = 'Finded:' .. v.Name .. ' Parent:' .. v.Parent.Name .. ' Parent2:' .. v.Parent.Parent.Name .. ' ' .. e
+				end
 			end
 		end
-		txt = txt .. format
 	end
-	local TTL = 'local ' .. txt .. ' = ' .. text
-	return TTL, txt
+	return events, finded
 end
 
 function jeHubModule.TextToTable(text, space, checkSpace)
