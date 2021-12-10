@@ -1,10 +1,10 @@
 --[[
-     ____.        ___ ___      ___.                _____         .__ 
-    |    | ____  /   |   \ __ _\_ |__             /  _  \ ______ |__|
-    |    |/ __ \/    ~    \  |  \ __ \   ______  /  /_\  \\____ \|  |
-/\__|    \  ___/\    Y    /  |  / \_\ \ /_____/ /    |    \  |_> >  |
-\________|\___  >\___|_  /|____/|___  /         \____|__  /   __/|__|
-              \/       \/           \/                  \/|__|       
+     ____.        ___ ___      ___.                _____         .__         _______       ____ 
+    |    | ____  /   |   \ __ _\_ |__             /  _  \ ______ |__|  ___  _\   _  \     /_   |
+    |    |/ __ \/    ~    \  |  \ __ \   ______  /  /_\  \\____ \|  |  \  \/ /  /_\  \     |   |
+/\__|    \  ___/\    Y    /  |  / \_\ \ /_____/ /    |    \  |_> >  |   \   /\  \_/   \    |   |
+\________|\___  >\___|_  /|____/|___  /         \____|__  /   __/|__|____\_/  \_____  / /\ |___|
+              \/       \/           \/                  \/|__|     /_____/          \/  \/      
 ]]
 
 
@@ -20,7 +20,7 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify(text, title, tweenSleep, tweenSleep2)
+function jeHubModule.Notify(title, text, tweenSleep, tweenSleep2)
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
 		if v:FindFirstChild('Holder') then
 			v:Remove()
