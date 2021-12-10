@@ -1,9 +1,34 @@
-setclipboard('discord.gg/script')
 warn('jehub-Api v0.1 by lolikarbuzik')
 
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
+
+function jeHubModule.DecodeRemotes()
+	local l = require(game:GetService("ReplicatedStorage").Modules.Utils.Network).InvokeServer
+	local function remote(remote, ...)
+	    local key = getupvalue(l, 1)
+	    function ToByteArgs(p61)
+		if 255 < p61 then
+		else
+		    return p61
+		end
+		return math.floor(p61 / 256) % 256
+	    end
+	    function ToByteString(p62)
+		return string.char(ToByteArgs(p62))
+	    end
+	    local decodedkey = ToByteString(key)
+	    if remote:IsA("RemoteEvent") then
+		hai = "FireServer"
+	    elseif remote:IsA("RemoteFunction") then
+		hai = "InvokeServer"
+	    else
+		return "lol"
+	    end
+	    remote[hai](remote, decodedkey, ...)
+	end
+end
 
 function jeHubModule.gameStatus()
 	local update = string.sub(MPS:GetProductInfo(game.PlaceId).Updated, 1,10)
