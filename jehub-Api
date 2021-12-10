@@ -38,7 +38,7 @@ function jeHubModule.Notify(text,title, radius, radius2)
 	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 	local Close = Instance.new("ImageButton")
 	Gui.Name = tostring(math.random(0,99999999))
-	Gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Gui.Parent = game:GetService('CoreGui')
 	Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Holder.Name = "Holder"
 	Holder.Parent = Gui
