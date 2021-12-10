@@ -46,7 +46,7 @@ function jeHubModule.Notify(text,title, radius, radius2)
 	Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 	Holder.ClipsDescendants = true
 	Holder.Position = UDim2.new(0.849696994, 0, 0.840552151, 0)
-	Holder.Size = UDim2.new(0, 236, 0, 121)
+	Holder.Size = UDim2.new(0, 0, 0, 0)
 	UICorner.CornerRadius = UDim.new(0, 10)
 	UICorner.Parent = Holder
 	GameIcon.Name = "GameIcon"
@@ -59,14 +59,14 @@ function jeHubModule.Notify(text,title, radius, radius2)
 	GameIcon.ZIndex = 9
 	GameIcon.Image = imageUrl
 	UICorner_2.Parent = GameIcon
-	Text.Name = text
+	Text.Name = "Text"
 	Text.Parent = Holder
 	Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Text.BackgroundTransparency = 1.000
 	Text.Position = UDim2.new(0.419491529, 0, 0.24778761, 0)
 	Text.Size = UDim2.new(0, 137, 0, 74)
 	Text.Font = Enum.Font.SourceSans
-	Text.Text = text
+	Text.Text = "Text"
 	Text.TextColor3 = Color3.fromRGB(236, 236, 236)
 	Text.TextScaled = true
 	Text.TextSize = 14.000
@@ -87,7 +87,7 @@ function jeHubModule.Notify(text,title, radius, radius2)
 	Icon.BorderColor3 = Color3.fromRGB(30, 30, 30)
 	Icon.Size = UDim2.new(0, 28, 0, 28)
 	UICorner_4.Parent = Icon
-	Title.Name = title
+	Title.Name = "Title"
 	Title.Parent = TopBar
 	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Title.BackgroundTransparency = 1.000
@@ -113,8 +113,12 @@ function jeHubModule.Notify(text,title, radius, radius2)
 	Close.ImageRectOffset = Vector2.new(924, 724)
 	Close.ImageRectSize = Vector2.new(36, 36)
 
+	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1)
+
 	Close.MouseButton1Click:Connect(function()
-		Gui:Remove()
+		Holder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.2, false, function()
+			Gui:Remove()
+		end)
 	end)
 end
 
