@@ -1,14 +1,3 @@
---[[
-	uwuwuwuwuwu
-	uwuwuwuwuwuuwuwuwuwuwuuwuwuwuwuwu
-	
-	uwuwuwuwuwu
-	uwuwuwuwuwuuwuwuwuwuwu
-	uwuwuwuwuwu
-	uwuwuwuwuwuuwuwuwuwuwu
-	uwuwuwuwuwu
-]]
-
 warn('jehub-Api v0.1 by lolikarbuzik')
 
 local jeHubModule = {}
@@ -16,6 +5,13 @@ local MPS = game:GetService("MarketplaceService")
 local default = 0.2
 
 function jeHubModule.DecodeRemotes()
+	for i, v in pairs(getgc(true)) do
+	    if type(v) == "table" and rawget(v, "Remote") then
+		if type(v.Remote) == "userdata" then
+		    v.Remote.Name = v.Name
+		end
+	    end
+	end
 	local l = require(game:GetService("ReplicatedStorage").Modules.Utils.Network).InvokeServer
 	local function remote(remote, ...)
 	    local key = getupvalue(l, 1)
