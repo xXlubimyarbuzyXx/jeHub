@@ -1,4 +1,10 @@
-warn('jehub-Api v0.1 by lolikarbuzik')
+--[[
+dddddddddddddddddddddddddd
+dddddddddddddddddddddddddd
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+dddddddddddddddddddddddddd
+dddddddddddddddddddddddddd
+]]
 
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
