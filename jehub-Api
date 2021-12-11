@@ -141,7 +141,6 @@ function jeHubModule.Notify(title, text, tweenSleep, tweenSleep2)
 	Close.ImageRectOffset = Vector2.new(924, 724)
 	Close.ImageRectSize = Vector2.new(36, 36)
 
-	wait(0.6)
 	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, tweenSleep)
 
 	Close.MouseButton1Click:Connect(function()
