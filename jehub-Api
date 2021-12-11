@@ -1,11 +1,3 @@
---[[
-dddddddddddddddddddddddddd
-dddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddd
-dddddddddddddddddddddddddd
-]]
-
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
