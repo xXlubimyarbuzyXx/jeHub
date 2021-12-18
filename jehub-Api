@@ -1,3 +1,12 @@
+--[[
+
+
+
+
+
+
+]]
+
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
@@ -49,6 +58,7 @@ function jeHubModule.Notify(title, text, normal)
 			v:Remove()
 		end
 	end
+    local size = UDim2.new(0, 226, 0, 115)
 	local imageUrl = jeHubModule.gameStatus()
 	if normal then
         local Holder = Instance.new("Frame")
@@ -66,7 +76,7 @@ function jeHubModule.Notify(title, text, normal)
         Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
         Holder.ClipsDescendants = true
         Holder.Position = UDim2.new(0.681818187, 0, 0.834417164, 0)
-        Holder.Size = UDim2.new(0, 226, 0, 115)
+        Holder.Size = UDim2.new()
         UICorner.CornerRadius = UDim.new(0, 10)
         UICorner.Parent = Holder
         Text.Name = "Text"
@@ -114,6 +124,10 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.Parent = Title
         UITextSizeConstraint_2.MaxTextSize = 18
         UITextSizeConstraint_2.MinTextSize = 10
+
+        Holder:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+        wait(0.2)
+        Holder:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
     else
         local HolderWithIcon = Instance.new("Frame")
         local UICorner = Instance.new("UICorner")
@@ -131,8 +145,8 @@ function jeHubModule.Notify(title, text, normal)
         HolderWithIcon.Active = true
         HolderWithIcon.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
         HolderWithIcon.ClipsDescendants = true
-        HolderWithIcon.Position = UDim2.new(0.849696994, 0, 0.834417164, 0)
-        HolderWithIcon.Size = UDim2.new(0, 226, 0, 115)
+        HolderWithIcon.Position = UDim2.new({0,0},{0,0})
+        HolderWithIcon.Size = UDim2.new()
         UICorner.CornerRadius = UDim.new(0, 10)
         UICorner.Parent = HolderWithIcon
         GameIcon.Name = "GameIcon"
@@ -190,6 +204,10 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.Parent = Title
         UITextSizeConstraint_2.MaxTextSize = 18
         UITextSizeConstraint_2.MinTextSize = 10
+
+        HolderWithIcon:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+        wait(0.2)
+        HolderWithIcon:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
     end
 end
 
