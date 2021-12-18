@@ -1,11 +1,3 @@
---[[
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd]]
-
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
@@ -51,109 +43,154 @@ function jeHubModule.gameStatus()
 	return imageUrl, gameName, update
 end
 
-function jeHubModule.Notify(title, text, tweenSleep, tweenSleep2)
+function jeHubModule.Notify(title, text, normal)
 	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
 		if v:FindFirstChild('Holder') then
 			v:Remove()
 		end
 	end
-	if not tweenSleep then
-		tweenSleep = default
-	end
-	if not tweenSleep2 then
-		tweenSleep2 = default
-	end
 	local imageUrl = jeHubModule.gameStatus()
-	local Gui = Instance.new("ScreenGui")
-	local Holder = Instance.new("Frame")
-	local UICorner = Instance.new("UICorner")
-	local GameIcon = Instance.new("ImageLabel")
-	local UICorner_2 = Instance.new("UICorner")
-	local Text = Instance.new("TextLabel")
-	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-	local TopBar = Instance.new("Frame")
-	local UICorner_3 = Instance.new("UICorner")
-	local Title = Instance.new("TextLabel")
-	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-	local Close = Instance.new("ImageButton")
-	Gui.Name = '0.' .. tostring(math.random(1,99999999))
-	Gui.Parent = game:GetService('CoreGui')
-	Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	Holder.Name = "Holder"
-	Holder.Parent = Gui
-	Holder.Active = true
-	Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-	Holder.ClipsDescendants = true
-	Holder.Position = UDim2.new(0.849696994, 0, 0.840552151, 0)
-	Holder.Size = UDim2.new(0, 0, 0, 0)
-	UICorner.CornerRadius = UDim.new(0, 10)
-	UICorner.Parent = Holder
-	GameIcon.Name = "GameIcon"
-	GameIcon.Parent = Holder
-	GameIcon.Active = true
-	GameIcon.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-	GameIcon.BackgroundTransparency = 1.000
-	GameIcon.Position = UDim2.new(0, 20, 0, 42)
-	GameIcon.Size = UDim2.new(0, 60, 0, 60)
-	GameIcon.ZIndex = 9
-	GameIcon.Image = imageUrl
-	UICorner_2.Parent = GameIcon
-	Text.Name = "Text"
-	Text.Parent = Holder
-	Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Text.BackgroundTransparency = 1.000
-	Text.Position = UDim2.new(0.419491529, 0, 0.34710744, 0)
-	Text.Size = UDim2.new(0, 137, 0, 59)
-	Text.Font = Enum.Font.SourceSans
-	Text.Text = text
-	Text.TextColor3 = Color3.fromRGB(236, 236, 236)
-	Text.TextScaled = true
-	Text.TextSize = 14.000
-	Text.TextWrapped = true
-	Text.TextXAlignment = Enum.TextXAlignment.Left
-	UITextSizeConstraint.Parent = Text
-	UITextSizeConstraint.MaxTextSize = 25
-	UITextSizeConstraint.MinTextSize = 15
-	TopBar.Name = "TopBar"
-	TopBar.Parent = Holder
-	TopBar.Active = true
-	TopBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-	TopBar.ClipsDescendants = true
-	TopBar.Size = UDim2.new(1, 0, 0, 28)
-	UICorner_3.Parent = TopBar
-	Title.Name = "Title"
-	Title.Parent = TopBar
-	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title.BackgroundTransparency = 1.000
-	Title.Position = UDim2.new(0.0593220331, 0, 0, 0)
-	Title.Size = UDim2.new(0, 222, 0, 28)
-	Title.Font = Enum.Font.Gotham
-	Title.Text = title
-	Title.TextColor3 = Color3.fromRGB(236, 236, 236)
-	Title.TextScaled = true
-	Title.TextSize = 16.000
-	Title.TextWrapped = true
-	Title.TextXAlignment = Enum.TextXAlignment.Left
-	UITextSizeConstraint_2.Parent = Title
-	UITextSizeConstraint_2.MaxTextSize = 18
-	UITextSizeConstraint_2.MinTextSize = 10
-	Close.Name = "Close"
-	Close.Parent = TopBar
-	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Close.BackgroundTransparency = 1.000
-	Close.Position = UDim2.new(0.889999986, 0, 0, 1)
-	Close.Size = UDim2.new(0, 25, 0, 25)
-	Close.Image = "rbxassetid://3926305904"
-	Close.ImageRectOffset = Vector2.new(924, 724)
-	Close.ImageRectSize = Vector2.new(36, 36)
-
-	Holder:TweenSize(UDim2.new(0, 236, 0, 121), Enum.EasingDirection.In, Enum.EasingStyle.Linear, tweenSleep)
-
-	Close.MouseButton1Click:Connect(function()
-		Holder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, tweenSleep2, false, function()
-			Gui:Remove()
-		end)
-	end)
+	if normal then
+        local Holder = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local Text = Instance.new("TextLabel")
+        local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+        local TopBar = Instance.new("Frame")
+        local UICorner_2 = Instance.new("UICorner")
+        local Helper = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+        Holder.Name = "Holder"
+        Holder.Parent = game:GetService("CoreGui").RobloxGui
+        Holder.Active = true
+        Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+        Holder.ClipsDescendants = true
+        Holder.Position = UDim2.new(0.681818187, 0, 0.834417164, 0)
+        Holder.Size = UDim2.new(0, 226, 0, 115)
+        UICorner.CornerRadius = UDim.new(0, 10)
+        UICorner.Parent = Holder
+        Text.Name = "Text"
+        Text.Parent = Holder
+        Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Text.BackgroundTransparency = 1.000
+        Text.Position = UDim2.new(0.0593218505, 0, 0.34710747, 0)
+        Text.Size = UDim2.new(0, 201, 0, 59)
+        Text.Font = Enum.Font.SourceSans
+        Text.Text = "Really Long Text"
+        Text.TextColor3 = Color3.fromRGB(236, 236, 236)
+        Text.TextScaled = true
+        Text.TextSize = 14.000
+        Text.TextWrapped = true
+        Text.TextXAlignment = Enum.TextXAlignment.Left
+        UITextSizeConstraint.Parent = Text
+        UITextSizeConstraint.MaxTextSize = 25
+        UITextSizeConstraint.MinTextSize = 15
+        TopBar.Name = "TopBar"
+        TopBar.Parent = Holder
+        TopBar.Active = true
+        TopBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        TopBar.ClipsDescendants = true
+        TopBar.Size = UDim2.new(1, 0, 0, 28)
+        UICorner_2.Parent = TopBar
+        Helper.Name = "Helper"
+        Helper.Parent = TopBar
+        Helper.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Helper.BorderColor3 = Color3.fromRGB(30, 30, 30)
+        Helper.Position = UDim2.new(0, 0, 0.785714269, 0)
+        Helper.Size = UDim2.new(0, 226, 0, 17)
+        Title.Name = "Title"
+        Title.Parent = Helper
+        Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Title.BackgroundTransparency = 1.000
+        Title.Position = UDim2.new(0.0593218505, 0, -1.29411769, 0)
+        Title.Size = UDim2.new(0, 212, 0, 28)
+        Title.Font = Enum.Font.Gotham
+        Title.Text = "Really Long Title"
+        Title.TextColor3 = Color3.fromRGB(236, 236, 236)
+        Title.TextScaled = true
+        Title.TextSize = 16.000
+        Title.TextWrapped = true
+        Title.TextXAlignment = Enum.TextXAlignment.Left
+        UITextSizeConstraint_2.Parent = Title
+        UITextSizeConstraint_2.MaxTextSize = 18
+        UITextSizeConstraint_2.MinTextSize = 10
+    else
+        local HolderWithIcon = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local GameIcon = Instance.new("ImageLabel")
+        local UICorner_2 = Instance.new("UICorner")
+        local Text = Instance.new("TextLabel")
+        local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+        local TopBar = Instance.new("Frame")
+        local UICorner_3 = Instance.new("UICorner")
+        local Helper = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+        HolderWithIcon.Name = "HolderWithIcon"
+        HolderWithIcon.Parent = game:GetService("CoreGui").RobloxGui
+        HolderWithIcon.Active = true
+        HolderWithIcon.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+        HolderWithIcon.ClipsDescendants = true
+        HolderWithIcon.Position = UDim2.new(0.849696994, 0, 0.834417164, 0)
+        HolderWithIcon.Size = UDim2.new(0, 226, 0, 115)
+        UICorner.CornerRadius = UDim.new(0, 10)
+        UICorner.Parent = HolderWithIcon
+        GameIcon.Name = "GameIcon"
+        GameIcon.Parent = HolderWithIcon
+        GameIcon.Active = true
+        GameIcon.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        GameIcon.BackgroundTransparency = 1.000
+        GameIcon.Position = UDim2.new(0, 20, 0, 42)
+        GameIcon.Size = UDim2.new(0, 60, 0, 60)
+        GameIcon.ZIndex = 9
+        GameIcon.Image = "rbxassetid://8275337473"
+        UICorner_2.Parent = GameIcon
+        Text.Name = "Text"
+        Text.Parent = HolderWithIcon
+        Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Text.BackgroundTransparency = 1.000
+        Text.Position = UDim2.new(0.41949138, 0, 0.34710747, 0)
+        Text.Size = UDim2.new(0, 119, 0, 59)
+        Text.Font = Enum.Font.SourceSans
+        Text.Text = "Really Long Text"
+        Text.TextColor3 = Color3.fromRGB(236, 236, 236)
+        Text.TextScaled = true
+        Text.TextSize = 14.000
+        Text.TextWrapped = true
+        Text.TextXAlignment = Enum.TextXAlignment.Left
+        UITextSizeConstraint.Parent = Text
+        UITextSizeConstraint.MaxTextSize = 25
+        UITextSizeConstraint.MinTextSize = 15
+        TopBar.Name = "TopBar"
+        TopBar.Parent = HolderWithIcon
+        TopBar.Active = true
+        TopBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        TopBar.ClipsDescendants = true
+        TopBar.Size = UDim2.new(1, 0, 0, 28)
+        UICorner_3.Parent = TopBar
+        Helper.Name = "Helper"
+        Helper.Parent = TopBar
+        Helper.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Helper.BorderColor3 = Color3.fromRGB(30, 30, 30)
+        Helper.Position = UDim2.new(0, 0, 0.785714269, 0)
+        Helper.Size = UDim2.new(0, 226, 0, 17)
+        Title.Name = "Title"
+        Title.Parent = Helper
+        Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Title.BackgroundTransparency = 1.000
+        Title.Position = UDim2.new(0.0593218505, 0, -1.29411769, 0)
+        Title.Size = UDim2.new(0, 212, 0, 28)
+        Title.Font = Enum.Font.Gotham
+        Title.Text = "Really Long Title"
+        Title.TextColor3 = Color3.fromRGB(236, 236, 236)
+        Title.TextScaled = true
+        Title.TextSize = 16.000
+        Title.TextWrapped = true
+        Title.TextXAlignment = Enum.TextXAlignment.Left
+        UITextSizeConstraint_2.Parent = Title
+        UITextSizeConstraint_2.MaxTextSize = 18
+        UITextSizeConstraint_2.MinTextSize = 10
+    end
 end
 
 function jeHubModule.FindClass(classes, location)
