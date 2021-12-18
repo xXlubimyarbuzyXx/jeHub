@@ -1,12 +1,3 @@
---[[
-
-
-
-
-
-
-]]
-
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
@@ -126,8 +117,9 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.MinTextSize = 10
 
         Holder:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
-        wait(0.2)
+        wait(0.5)
         Holder:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+	Holder:Remove()
     else
         local HolderWithIcon = Instance.new("Frame")
         local UICorner = Instance.new("UICorner")
@@ -206,8 +198,9 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.MinTextSize = 10
 
         HolderWithIcon:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
-        wait(0.2)
+        wait(0.5)
         HolderWithIcon:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+	HolderWithIcon:Remove()
     end
 end
 
