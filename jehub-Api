@@ -1,3 +1,10 @@
+--[[
+
+
+
+
+]]
+
 local jeHubModule = {}
 local MPS = game:GetService("MarketplaceService")
 local default = 0.2
@@ -44,11 +51,12 @@ function jeHubModule.gameStatus()
 end
 
 function jeHubModule.Notify(title, text, normal)
-	for _,v in pairs(game:GetService("CoreGui"):GetChildren()) do
-		if v:FindFirstChild('Holder') then
-			v:Remove()
-		end
-	end
+	local core = game:GetService("CoreGui")
+    for _,v in pairs(core.RobloxGui:GetChildren()) do
+        if string.sub(v.Name, 1,6) == 'Holder' then
+            v:Remove();
+        end
+    end
     local size = UDim2.new(0, 226, 0, 115)
 	local imageUrl = jeHubModule.gameStatus()
 	if normal then
@@ -119,7 +127,6 @@ function jeHubModule.Notify(title, text, normal)
         Holder:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
         wait(0.5)
         Holder:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
-	Holder:Remove()
     else
         local HolderWithIcon = Instance.new("Frame")
         local UICorner = Instance.new("UICorner")
@@ -200,7 +207,6 @@ function jeHubModule.Notify(title, text, normal)
         HolderWithIcon:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
         wait(0.5)
         HolderWithIcon:TweenSize(UDim2.new({},{}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
-	HolderWithIcon:Remove()
     end
 end
 
