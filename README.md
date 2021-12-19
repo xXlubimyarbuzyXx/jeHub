@@ -1,4 +1,4 @@
-JeHub and jh api is made by me lmfao
+JeHub and jh api is made by me lmfao. And im also very good at developing cheats ;D
 
 Supports:
 Pet Fighters Simulator,
