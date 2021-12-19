@@ -1,9 +1,1 @@
-JeHub and jh api is made by me lmfao. And im also very good at developing cheats ;D
-
-Supports:
-Pet Fighters Simulator,
-Jetpack Jumpers,
-Project Hero (I will update),
-Not supported yet:
-anime fighters,
-Legends Re:Writen
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Very+Good+Developer+(%E3%83%BB%E2%97%87%E3%83%BB))](https://git.io/typing-svg)
