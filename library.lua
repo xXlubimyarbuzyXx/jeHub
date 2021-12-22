@@ -173,7 +173,7 @@ function Library:new(text)
         Page_.ClipsDescendants = true
         Page_.Position = UDim2.new(1.07606733, 0, 0.465882361, 0)
         Page_.Size = UDim2.new(0, 328, 0, 257)
-        Page_.Visible = false
+        Page_.Visible = visibleEnabled
 
         PageCorner.CornerRadius = UDim.new(0, 4)
         PageCorner.Name = "PageCorner"
@@ -191,6 +191,11 @@ function Library:new(text)
         Pagelist.SortOrder = Enum.SortOrder.LayoutOrder
         Pagelist.Padding = UDim.new(0, 10)
         
+        PageButton_.MouseButton1Click:Connect(function()
+            visibleEnabled = not visibleEnabled
+            Page_.Visible = visibleEnabled
+        end)
+
         local Library3 = {}
 
         function Library3:Button(text, callback)
@@ -292,3 +297,4 @@ function Library:new(text)
 end
 
 return Library
+-- 300 wowowowowowoowo
