@@ -274,3 +274,5 @@ function Library:new(text)
     end
     return Library2
 end
+
+return Library
