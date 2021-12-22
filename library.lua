@@ -14,6 +14,7 @@ function Library:new(text)
     local LeftCorner = Instance.new("UICorner")
     local Frame_2 = Instance.new("Frame")
     local FrameCorner = Instance.new("UICorner")
+    local Items = Instance.new("Frame")
 
     ScreenGui.Parent = game:GetService('CoreGui')
     ScreenGui.Name = text
@@ -81,6 +82,13 @@ function Library:new(text)
     FrameCorner.Name = "FrameCorner"
     FrameCorner.Parent = Frame_2
 
+    Items.Name = "Items"
+    Items.Parent = Leftbar
+    Items.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Items.BackgroundTransparency = 1.000
+    Items.Position = UDim2.new(0, 0, 0.119999997, 0)
+    Items.Size = UDim2.new(0, 92, 1, 0)
+
     local UIS = game:GetService('UserInputService')
     local frame = Holder
     local dragToggle = nil
@@ -121,7 +129,6 @@ function Library:new(text)
     function Library2:Page(text)
         local visibleEnabled = false
         local PageButton = Instance.new("TextButton")
-        local Items = Instance.new("Frame")
         local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
         local PageItems = Instance.new("Frame")
         local UICorner_2 = Instance.new("UICorner")
@@ -167,13 +174,6 @@ function Library:new(text)
         UIListLayout.Parent = Items_2
         UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
         UIListLayout.Padding = UDim.new(0, 10)
-
-        Items.Name = "Items"
-        Items.Parent = Leftbar
-        Items.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Items.BackgroundTransparency = 1.000
-        Items.Position = UDim2.new(0, 0, 0.119999997, 0)
-        Items.Size = UDim2.new(0, 92, 1, 0)
 
         UIListLayout_2.Parent = Items
         UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
