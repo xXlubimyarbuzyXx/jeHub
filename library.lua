@@ -1,6 +1,8 @@
+local tween = game:GetService('TweenService')
+
 local Library = {}
 
-function Library:new(text)
+function Library.new(text)
     local ScreenGui = Instance.new("ScreenGui")
     local Holder = Instance.new("Frame")
     local HolderCorner = Instance.new("UICorner")
@@ -227,8 +229,8 @@ function Library:new(text)
             end)
         end
 
-        function Library3:Toggle(text, callback)
-            local enabled = false
+        function Library3:Toggle(text,enabled, callback)
+            local enabled = enabled or false
 
             local Toggle = Instance.new("TextButton")
             local ToggleCorner = Instance.new("UICorner")
@@ -289,6 +291,49 @@ function Library:new(text)
             FrameTogCorner.CornerRadius = UDim.new(0, 6)
             FrameTogCorner.Name = "FrameTogCorner"
             FrameTogCorner.Parent = Frame_3
+
+            Toggle.MouseButton1Click:Connect(function()
+                enabled = not enabled
+                if enabled then
+                    local anim = tween:Create(Frame_3, TweenInfo.new(0.2), {Position = UDim2.new(0.5,0,0,1)})
+                    anim:Play()
+                else
+                    local anim = tween:Create(Frame_3, TweenInfo.new(0.2), {Position = UDim2.new(0,0,0,1)})
+                    anim:Play()
+                end
+                pcall(callback, enabled)
+            end)
+        end
+
+        function Library3:Textbox(text, callback)
+            local callback = callback or function() end
+
+            local TextBox = Instance.new("TextBox")
+            local UICorner = Instance.new("UICorner")
+            local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+
+            TextBox.Parent = PageItems_
+            TextBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            TextBox.Position = UDim2.new(0, 0, 0.362869203, 0)
+            TextBox.Size = UDim2.new(0, 304, 0, 35)
+            TextBox.Font = Enum.Font.Gotham
+            TextBox.Text = text
+            TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextBox.TextScaled = true
+            TextBox.TextSize = 14.000
+            TextBox.TextWrapped = true
+
+            UICorner.Parent = TextBox
+
+            UITextSizeConstraint.Parent = TextBox
+            UITextSizeConstraint.MaxTextSize = 18
+            UITextSizeConstraint.MinTextSize = 5
+
+            TextBox.Changed:Connect(function(property)
+                if property == 'Text' then
+                    pcall(callback, TextBox.Text)
+                end
+            end)
         end
 
         return Library3
@@ -297,4 +342,3 @@ function Library:new(text)
 end
 
 return Library
--- 300 wowowowowowoowo
