@@ -1,3 +1,4 @@
+local UIS = game:GetService('UserInputService')
 local tween = game:GetService('TweenService')
 
 local Library = {}
@@ -100,7 +101,6 @@ function Library.new(text)
     Sections.BackgroundTransparency = 1.000
     Sections.Size = UDim2.new(0, 100, 0, 100)
     --// dragable ui
-    local UIS = game:GetService('UserInputService')
     local frame = Holder
     local dragToggle = nil
     local dragSpeed = 0.1
@@ -338,6 +338,11 @@ function Library.new(text)
 
         return Library3
     end
+
+    function Library2:ToggleUI()
+        ScreenGui.Enabled = not ScreenGui.Enabled
+    end
+
     return Library2
 end
 
