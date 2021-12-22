@@ -14,16 +14,20 @@ function Library:new(text)
     local LeftCorner = Instance.new("UICorner")
     local Frame_2 = Instance.new("Frame")
     local FrameCorner = Instance.new("UICorner")
-    local Items = Instance.new("Frame")
+    local Pages = Instance.new("Frame")
+    local UIListLayout = Instance.new("UIListLayout")
+    local Sections = Instance.new("Frame")
 
-    ScreenGui.Parent = game:GetService('CoreGui')
+    ScreenGui.Parent = game:GetService("CoreGui")
     ScreenGui.Name = text
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     Holder.Name = "Holder"
     Holder.Parent = ScreenGui
     Holder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    Holder.Position = UDim2.new(0.444848478, 0, 0.36012271, 0)
-    Holder.Size = UDim2.new(0, 456, 0, 322)
+    Holder.ClipsDescendants = true
+    Holder.Position = UDim2.new(0.444848478, 0, 0.366257668, 0)
+    Holder.Size = UDim2.new(0, 456, 0, 317)
 
     HolderCorner.Name = "HolderCorner"
     HolderCorner.Parent = Holder
@@ -58,7 +62,6 @@ function Library:new(text)
     Title.TextScaled = true
     Title.TextSize = 14.000
     Title.TextWrapped = true
-    Title.ZIndex = 3
 
     UITextSizeConstraint.Parent = Title
     UITextSizeConstraint.MaxTextSize = 20
@@ -82,13 +85,19 @@ function Library:new(text)
     FrameCorner.Name = "FrameCorner"
     FrameCorner.Parent = Frame_2
 
-    Items.Name = "Items"
-    Items.Parent = Leftbar
-    Items.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Items.BackgroundTransparency = 1.000
-    Items.Position = UDim2.new(0, 0, 0.119999997, 0)
-    Items.Size = UDim2.new(0, 92, 1, 0)
+    Pages.Name = "Pages"
+    Pages.Parent = Leftbar
+    Pages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Pages.BackgroundTransparency = 1.000
+    Pages.Position = UDim2.new(0, 0, 0.119999997, 0)
+    Pages.Size = UDim2.new(0, 92, 1, 0)
 
+    Sections.Name = "Sections"
+    Sections.Parent = Leftbar
+    Sections.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Sections.BackgroundTransparency = 1.000
+    Sections.Size = UDim2.new(0, 100, 0, 100)
+    --// dragable ui
     local UIS = game:GetService('UserInputService')
     local frame = Holder
     local dragToggle = nil
@@ -128,73 +137,71 @@ function Library:new(text)
 
     function Library2:Page(text)
         local visibleEnabled = false
-        local PageButton = Instance.new("TextButton")
+
+        local PageButton_ = Instance.new("TextButton")
         local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-        local PageItems = Instance.new("Frame")
-        local UICorner_2 = Instance.new("UICorner")
-        local Items_2 = Instance.new("Frame")
-        local UIListLayout_2 = Instance.new("UIListLayout")
-        local UIListLayout = Instance.new("UIListLayout")
-        PageButton.ZIndex = 2
-        PageButton.Name = "PageButton"
-        PageButton.Parent = Items
-        PageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        PageButton.BackgroundTransparency = 1.000
-        PageButton.Position = UDim2.new(0.0326086953, 0, 0.0590405911, 0)
-        PageButton.Size = UDim2.new(0, 89, 0, 34)
-        PageButton.Font = Enum.Font.Gotham
-        PageButton.Text = text
-        PageButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-        PageButton.TextScaled = true
-        PageButton.TextSize = 14.000
-        PageButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-        PageButton.TextWrapped = true
-    
-        UITextSizeConstraint_2.Parent = PageButton
+        local Page_ = Instance.new("Frame")
+        local PageCorner = Instance.new("UICorner")
+        local PageItems_ = Instance.new("Frame")
+        local Pagelist = Instance.new("UIListLayout")
+        
+        PageButton_.Name = "PageButton_" .. text
+        PageButton_.Parent = Pages
+        PageButton_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        PageButton_.BackgroundTransparency = 1.000
+        PageButton_.Position = UDim2.new(0.0326086953, 0, 0.0590405911, 0)
+        PageButton_.Size = UDim2.new(0, 89, 0, 34)
+        PageButton_.Font = Enum.Font.Gotham
+        PageButton_.Text = text
+        PageButton_.TextColor3 = Color3.fromRGB(255, 255, 255)
+        PageButton_.TextScaled = true
+        PageButton_.TextSize = 14.000
+        PageButton_.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+        PageButton_.TextWrapped = true
+
+        UITextSizeConstraint_2.Parent = PageButton_
         UITextSizeConstraint_2.MaxTextSize = 15
         UITextSizeConstraint_2.MinTextSize = 5
-    
-        PageItems.Visible = visibleEnabled
-        PageItems.Name = "PageItems"
-        PageItems.Parent = PageButton
-        PageItems.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
-        PageItems.Position = UDim2.new(1.14606738, 0, 0.205882356, 0)
-        PageItems.Size = UDim2.new(0, 328, 0, 257)
-    
-        UICorner_2.CornerRadius = UDim.new(0, 4)
-        UICorner_2.Parent = PageItems
-    
-        Items_2.Name = "Items"
-        Items_2.Parent = PageItems
-        Items_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Items_2.BackgroundTransparency = 1.000
-        Items_2.Position = UDim2.new(0.0328358226, 0, 0.0389105044, 0)
-        Items_2.Size = UDim2.new(0, 314, 0, 237)
-    
-        UIListLayout.Parent = Items_2
+
+        UIListLayout.Parent = Pages
         UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-        UIListLayout.Padding = UDim.new(0, 10)
+        UIListLayout.Padding = UDim.new(0, 5)
 
-        UIListLayout_2.Parent = Items
-        UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-        UIListLayout_2.Padding = UDim.new(0, 5)
+        Page_.Name = "Page_" .. text
+        Page_.Parent = Sections
+        Page_.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+        Page_.ClipsDescendants = true
+        Page_.Position = UDim2.new(1.07606733, 0, 0.465882361, 0)
+        Page_.Size = UDim2.new(0, 328, 0, 257)
+        Page_.Visible = false
 
-        PageButton.MouseButton1Click:Connect(function()
-            visibleEnabled = not visibleEnabled
-            PageItems.Visible = visibleEnabled
-        end)
+        PageCorner.CornerRadius = UDim.new(0, 4)
+        PageCorner.Name = "PageCorner"
+        PageCorner.Parent = Page_
 
+        PageItems_.Name = "PageItems_" .. text
+        PageItems_.Parent = Page_
+        PageItems_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        PageItems_.BackgroundTransparency = 1.000
+        PageItems_.Position = UDim2.new(0.0328358226, 0, 0.0389105044, 0)
+        PageItems_.Size = UDim2.new(0, 314, 0, 237)
+
+        Pagelist.Name = "Pagelist"
+        Pagelist.Parent = PageItems_
+        Pagelist.SortOrder = Enum.SortOrder.LayoutOrder
+        Pagelist.Padding = UDim.new(0, 10)
+        
         local Library3 = {}
 
         function Library3:Button(text, callback)
             local callback = callback or function() end
-            
+
             local Button = Instance.new("TextButton")
             local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
-            local UICorner_3 = Instance.new("UICorner")
+            local ButtonCorner = Instance.new("UICorner")
 
             Button.Name = "Button"
-            Button.Parent = Items_2
+            Button.Parent = PageItems_
             Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
             Button.Position = UDim2.new(0.0447761193, 0, 0.0700389147, 0)
             Button.Size = UDim2.new(0, 304, 0, 33)
@@ -202,11 +209,13 @@ function Library:new(text)
             Button.TextColor3 = Color3.fromRGB(255, 255, 255)
             Button.TextSize = 14.000
             Button.Text = text
-        
+
             UITextSizeConstraint_3.Parent = Button
             UITextSizeConstraint_3.MaxTextSize = 15
-            UITextSizeConstraint_3.MinTextSize = 5 
-            UICorner_3.Parent = Button
+            UITextSizeConstraint_3.MinTextSize = 5
+
+            ButtonCorner.Name = "ButtonCorner"
+            ButtonCorner.Parent = Button
 
             Button.MouseButton1Click:Connect(function()
                 pcall(callback)
@@ -217,57 +226,64 @@ function Library:new(text)
             local enabled = false
 
             local Toggle = Instance.new("TextButton")
-            local UICorner_4 = Instance.new("UICorner")
+            local ToggleCorner = Instance.new("UICorner")
             local Text = Instance.new("TextLabel")
             local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
             local ToggleFrame = Instance.new("Frame")
-            local UICorner_5 = Instance.new("UICorner")
+            local TogFrameCorner = Instance.new("UICorner")
             local Frame_3 = Instance.new("Frame")
-            local UICorner_6 = Instance.new("UICorner")
+            local FrameTogCorner = Instance.new("UICorner")
 
-            Toggle.Name = "Toggle"
-            Toggle.Parent = Items_2
+            Toggle.Name = "Toggle_" .. text
+            Toggle.Parent = PageItems_
             Toggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
             Toggle.Position = UDim2.new(0.0447761193, 0, 0.0700389147, 0)
             Toggle.Size = UDim2.new(0, 304, 0, 33)
             Toggle.Font = Enum.Font.Gotham
-            Toggle.Text = ''
+            Toggle.Text = ""
             Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
             Toggle.TextSize = 14.000
             Toggle.TextXAlignment = Enum.TextXAlignment.Left
-        
-            UICorner_4.Parent = Toggle
-        
+
+            ToggleCorner.Name = "ToggleCorner"
+            ToggleCorner.Parent = Toggle
+
             Text.Name = "Text"
             Text.Parent = Toggle
             Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Text.BackgroundTransparency = 1.000
-            Text.Position = UDim2.new(0.0263157897, 0, 0, 0)
-            Text.Size = UDim2.new(0, 94, 0, 33)
+            Text.Position = UDim2.new(0.049342107, 0, 0, 0)
+            Text.Size = UDim2.new(0, 197, 0, 33)
             Text.Font = Enum.Font.Gotham
             Text.Text = text
             Text.TextColor3 = Color3.fromRGB(255, 255, 255)
             Text.TextScaled = true
             Text.TextSize = 14.000
             Text.TextWrapped = true
-        
+            Text.TextXAlignment = Enum.TextXAlignment.Left
+
             UITextSizeConstraint_4.Parent = Text
             UITextSizeConstraint_4.MaxTextSize = 15
             UITextSizeConstraint_4.MinTextSize = 5
-        
+
             ToggleFrame.Name = "ToggleFrame"
             ToggleFrame.Parent = Toggle
             ToggleFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            ToggleFrame.Position = UDim2.new(0.75, 0, 0.200000003, 0)
-            ToggleFrame.Size = UDim2.new(0.200000003, 0, 0.600000024, 0)
-        
-            UICorner_5.Parent = ToggleFrame
-        
+            ToggleFrame.Position = UDim2.new(0.782894552, 0, 0.200000182, 0)
+            ToggleFrame.Size = UDim2.new(0.167105287, 0, 0.600000024, 0)
+
+            TogFrameCorner.CornerRadius = UDim.new(0, 6)
+            TogFrameCorner.Name = "TogFrameCorner"
+            TogFrameCorner.Parent = ToggleFrame
+
             Frame_3.Parent = ToggleFrame
             Frame_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Frame_3.Size = UDim2.new(0.5, 0, 1, 0)
-        
-            UICorner_6.Parent = Frame_3
+            Frame_3.Position = UDim2.new(0, 0, 0, 1)
+            Frame_3.Size = UDim2.new(0.5, 0, 0.899999976, 0)
+
+            FrameTogCorner.CornerRadius = UDim.new(0, 6)
+            FrameTogCorner.Name = "FrameTogCorner"
+            FrameTogCorner.Parent = Frame_3
         end
 
         return Library3
