@@ -1,1 +1,1 @@
-[![Typing SVG](http://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=JeHub+by+lolikarbuzik%239173;Supported+games%3A+Project+Hero;Jetpack+Jumpers%2C+Pet+Fighters+Simulator;Supported+soon%3A;Anime+fighters%2C+Legends+Re%3AWriten)](https://git.io/typing-svg)
+[![Typing SVG](http://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Jehub+by+lolikarbuzik%239173)](https://git.io/typing-svg)
