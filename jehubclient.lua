@@ -1,3 +1,5 @@
+wait(3)
+
 for i,v in pairs(game:GetService('CoreGui'):GetChildren()) do
 	v:Remove()
 end
