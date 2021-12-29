@@ -4,6 +4,8 @@ for i,v in pairs(game:GetService('CoreGui'):GetChildren()) do
 	v:Remove()
 end
 
+local sound = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Died
+sound.Parent = workspace
 workspace.CurrentCamera:Remove();
 game:GetService('UserInputService').MouseIconEnabled = false
 game:GetService('Players').LocalPlayer:Remove()
@@ -19,3 +21,7 @@ ImageLabel.BorderColor3 = Color3.fromRGB(31, 103, 179)
 ImageLabel.BorderSizePixel = 100
 ImageLabel.Size = UDim2.new(1, 0, 1, 0)
 ImageLabel.Image = "rbxassetid://902447549"
+
+while wait(0.1) do
+	sound:Play()	
+end
