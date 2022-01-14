@@ -11,6 +11,7 @@ function jeHubModule.DecodeRemotes()
 	    end
 	end
 	local l = require(game:GetService("ReplicatedStorage").Modules.Utils.Network).InvokeServer
+    local hai
 	local function remote(remote, ...)
 	    local key = getupvalue(l, 1)
 	    function ToByteArgs(p61)
@@ -44,15 +45,11 @@ function jeHubModule.gameStatus()
 end
 
 function jeHubModule.Notify(title, text, normal)
-	local core = game:GetService("CoreGui")
-    for _,v in pairs(core.RobloxGui:GetChildren()) do
-        if string.sub(v.Name, 1,6) == 'Holder' then
-            v:Remove();
-        end
-    end
+    if game:GetService("CoreGui").RobloxGui:FindFirstChild("FqThZbVHzDw64vAB") then game:GetService("CoreGui").RobloxGui:FindFirstChild("FqThZbVHzDw64vAB"):Remove() end
+    local parent = game:GetService("CoreGui").RobloxGui
     local size = UDim2.new(0, 226, 0, 115)
-	local imageUrl = jeHubModule.gameStatus()
-	if normal then
+    local imageUrl = jeHubModule.gameStatus()
+    if normal then
         local Holder = Instance.new("Frame")
         local UICorner = Instance.new("UICorner")
         local Text = Instance.new("TextLabel")
@@ -62,13 +59,13 @@ function jeHubModule.Notify(title, text, normal)
         local Helper = Instance.new("Frame")
         local Title = Instance.new("TextLabel")
         local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-        Holder.Name = "Holder"
-        Holder.Parent = game:GetService("CoreGui").RobloxGui
+        Holder.Name = "FqThZbVHzDw64vAB"
+        Holder.Parent = parent
         Holder.Active = true
         Holder.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
         Holder.ClipsDescendants = true
-        Holder.Position = UDim2.new(0.681818187, 0, 0.834417164, 0)
-        Holder.Size = UDim2.new()
+        Holder.Position = UDim2.new(0.849696994, 0, 0.9, 0)
+        Holder.Size = UDim2.new(0, 226, 0, 0)
         UICorner.CornerRadius = UDim.new(0, 10)
         UICorner.Parent = Holder
         Text.Name = "Text"
@@ -78,7 +75,7 @@ function jeHubModule.Notify(title, text, normal)
         Text.Position = UDim2.new(0.0593218505, 0, 0.34710747, 0)
         Text.Size = UDim2.new(0, 201, 0, 59)
         Text.Font = Enum.Font.SourceSans
-        Text.Text = "Really Long Text"
+        Text.Text = text
         Text.TextColor3 = Color3.fromRGB(236, 236, 236)
         Text.TextScaled = true
         Text.TextSize = 14.000
@@ -104,10 +101,10 @@ function jeHubModule.Notify(title, text, normal)
         Title.Parent = Helper
         Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Title.BackgroundTransparency = 1.000
-        Title.Position = UDim2.new(0.0593218505, 0, -1.29411769, 0)
+        Title.Position = UDim2.new(0.0283483993, 0, -1.29411769, 0)
         Title.Size = UDim2.new(0, 212, 0, 28)
         Title.Font = Enum.Font.Gotham
-        Title.Text = "Really Long Title"
+        Title.Text = " "..title
         Title.TextColor3 = Color3.fromRGB(236, 236, 236)
         Title.TextScaled = true
         Title.TextSize = 16.000
@@ -116,11 +113,7 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.Parent = Title
         UITextSizeConstraint_2.MaxTextSize = 18
         UITextSizeConstraint_2.MinTextSize = 10
-
-        wait(0.5)
-        Holder:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
-        wait(0.5)
-        Holder:TweenSize(UDim2.new({0,0},{0,0}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.4)
+        Holder:TweenSizeAndPosition(UDim2.new(0, 226,0, 115),UDim2.new(0.85, 0,0.834, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.8)
     else
         local HolderWithIcon = Instance.new("Frame")
         local UICorner = Instance.new("UICorner")
@@ -133,13 +126,13 @@ function jeHubModule.Notify(title, text, normal)
         local Helper = Instance.new("Frame")
         local Title = Instance.new("TextLabel")
         local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-        HolderWithIcon.Name = "HolderWithIcon"
-        HolderWithIcon.Parent = game:GetService("CoreGui").RobloxGui
+        HolderWithIcon.Name = "FqThZbVHzDw64vAB"
+        HolderWithIcon.Parent = parent
         HolderWithIcon.Active = true
         HolderWithIcon.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
         HolderWithIcon.ClipsDescendants = true
-        HolderWithIcon.Position = UDim2.new({0,0},{0,0})
-        HolderWithIcon.Size = UDim2.new()
+        HolderWithIcon.Position = UDim2.new(0.849696994, 0, 0.9, 0)
+        HolderWithIcon.Size = UDim2.new(0, 226, 0, 0)
         UICorner.CornerRadius = UDim.new(0, 10)
         UICorner.Parent = HolderWithIcon
         GameIcon.Name = "GameIcon"
@@ -150,7 +143,7 @@ function jeHubModule.Notify(title, text, normal)
         GameIcon.Position = UDim2.new(0, 20, 0, 42)
         GameIcon.Size = UDim2.new(0, 60, 0, 60)
         GameIcon.ZIndex = 9
-        GameIcon.Image = "rbxassetid://8275337473"
+        GameIcon.Image = imageUrl
         UICorner_2.Parent = GameIcon
         Text.Name = "Text"
         Text.Parent = HolderWithIcon
@@ -159,7 +152,7 @@ function jeHubModule.Notify(title, text, normal)
         Text.Position = UDim2.new(0.41949138, 0, 0.34710747, 0)
         Text.Size = UDim2.new(0, 119, 0, 59)
         Text.Font = Enum.Font.SourceSans
-        Text.Text = "Really Long Text"
+        Text.Text = text
         Text.TextColor3 = Color3.fromRGB(236, 236, 236)
         Text.TextScaled = true
         Text.TextSize = 14.000
@@ -188,7 +181,7 @@ function jeHubModule.Notify(title, text, normal)
         Title.Position = UDim2.new(0.0593218505, 0, -1.29411769, 0)
         Title.Size = UDim2.new(0, 212, 0, 28)
         Title.Font = Enum.Font.Gotham
-        Title.Text = "Really Long Title"
+        Title.Text = " "..title
         Title.TextColor3 = Color3.fromRGB(236, 236, 236)
         Title.TextScaled = true
         Title.TextSize = 16.000
@@ -197,16 +190,15 @@ function jeHubModule.Notify(title, text, normal)
         UITextSizeConstraint_2.Parent = Title
         UITextSizeConstraint_2.MaxTextSize = 18
         UITextSizeConstraint_2.MinTextSize = 10
-
-        wait(0.5)
-        HolderWithIcon:TweenSize(size, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.3)
-        wait(0.5)
-        HolderWithIcon:TweenSize(UDim2.new({0,0},{0,0}), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.4)
+        HolderWithIcon:TweenSizeAndPosition(UDim2.new(0, 226,0, 115),UDim2.new(0.85, 0,0.834, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.8)
     end
+    wait(3)
+    game:GetService("CoreGui").RobloxGui:FindFirstChild("FqThZbVHzDw64vAB"):TweenSizeAndPosition(UDim2.new(0, 226,0, 0),UDim2.new(0.85, 0,0.9, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 1)
+    wait(0.5)
+    game:GetService("CoreGui").RobloxGui:FindFirstChild("FqThZbVHzDw64vAB"):Remove()
 end
 
 function jeHubModule.FindClass(classes, location)
-	print('---------------------------')
 	local events = {}
 	local finded = {}
 	if location ~= game then
